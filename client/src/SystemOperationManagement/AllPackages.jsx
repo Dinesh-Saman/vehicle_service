@@ -7,20 +7,17 @@ import {
   faPencilAlt,
   faTrash,
   faBoxes,
-  faTachometerAlt,
-  faCog,
-  faSignOutAlt,
-  faUser,
+  faChartPie,
+  faFilePdf,
+  faRefresh,
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Badge, Card, Tab, Tabs } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "react-tooltip/dist/react-tooltip.css"; // Import React Tooltip CSS
-import { Tooltip } from "react-tooltip"; // Import React Tooltip component
-import "./Pages/styles/AllPackages.css"; // Custom CSS for animations
+import { Tooltip } from "react-tooltip";
 import { Pie, Bar } from "react-chartjs-2";
-import { jsPDF } from "jspdf"; // Import jsPDF for PDF generation
-import logo from '../systemoperationmanagement/assets/Levaggio.png'; // Import logo
+import { jsPDF } from "jspdf";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -32,6 +29,8 @@ import {
   ArcElement,
 } from "chart.js";
 import "jspdf-autotable";
+
+// Register ChartJS components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -45,32 +44,41 @@ ChartJS.register(
 const AllPackages = () => {
   const [packages, setPackages] = useState([]);
   const [packageCount, setPackageCount] = useState(0);
-  const [showCharts, setShowCharts] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("packages");
 
   useEffect(() => {
     fetchPackages();
   }, []);
 
   const fetchPackages = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get("http://localhost:3001/package/");
       setPackages(response.data);
       setPackageCount(response.data.length);
     } catch (error) {
       console.error("Error fetching packages:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to load packages. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this package?",
+      icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#dc3545",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -79,291 +87,239 @@ const AllPackages = () => {
             prevPackages.filter((pkg) => pkg._id !== id)
           );
           setPackageCount((prevCount) => prevCount - 1);
-          Swal.fire("Deleted!", "The package has been deleted.", "success");
+          Swal.fire({
+            title: "Deleted!",
+            text: "Package has been deleted.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         } catch (error) {
-          Swal.fire(
-            "Error!",
-            "There was an issue deleting the package.",
-            "error"
-          );
+          Swal.fire("Error!", "Failed to delete package.", "error");
           console.error("Error deleting package:", error);
         }
       }
     });
   };
 
-  // Data for Pie Chart: Package Availability
+  // Chart data configurations
   const availabilityData = {
     labels: ["Available", "Not Available"],
     datasets: [
       {
-        label: "Package Availability",
         data: [
           packages.filter((pkg) => pkg.availability).length,
           packages.filter((pkg) => !pkg.availability).length,
         ],
         backgroundColor: ["#4CAF50", "#FFC107"],
+        borderColor: ["#388E3C", "#FFA000"],
+        borderWidth: 1,
       },
     ],
   };
 
-  // Data for Pie Chart: Overall Distribution
-  const pieData = {
-    labels: ["Packages", "Other"],
+  const priceRangeData = {
+    labels: packages.map((pkg) => pkg.packageName),
     datasets: [
       {
-        label: "Distribution",
-        data: [packageCount, 100 - packageCount],
-        backgroundColor: ["#36A2EB", "#FF6384"],
+        label: "Price ($)",
+        data: packages.map((pkg) => pkg.price),
+        backgroundColor: "#36A2EB",
+        borderColor: "#1E88E5",
+        borderWidth: 1,
       },
     ],
   };
 
-  // Data for Bar Chart: Min and Max Prices
-  const minMaxPriceData = {
-    labels: ["Min Price", "Max Price"],
-    datasets: [
-      {
-        label: "Price Range",
-        data: [
-          Math.min(...packages.map((pkg) => pkg.price)),
-          Math.max(...packages.map((pkg) => pkg.price)),
-        ],
-        backgroundColor: ["#FF6384", "#36A2EB"],
-      },
-    ],
-  };
-
-  const handleSidebarClick = (section) => {
-    if (section === "packages") {
-      setShowModal(true);
-    } else {
-      setShowModal(false);
-    }
-  };
-
-  const handleCloseModal = () => setShowModal(false);
-
-  const generateReport = async () => {
+  const generateReport = () => {
     Swal.fire({
-      title: "Generating Report...",
-      html: "Please wait while the report is being generated.",
-      timer: 2000, // Display for 2 seconds
+      title: "Generating Report",
+      html: "Please wait while we prepare your report...",
       timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-      },
+      didOpen: () => Swal.showLoading(),
+      allowOutsideClick: false,
     });
-  
-    try {
-      // Wait for 2 seconds to simulate report generation
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-  
-      // Calculate the number of available and unavailable packages
-      const availablePackagesCount = packages.filter((pkg) => pkg.availability)
-        .length;
-      const unavailablePackagesCount = packageCount - availablePackagesCount;
-  
-      // Create a PDF document
+
+    setTimeout(() => {
       const doc = new jsPDF();
       const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
-      const currentDate = new Date().toLocaleDateString();
-  
-      // Add outline to the PDF report
-      doc.setLineWidth(1);
-      doc.rect(10, 10, pageWidth - 20, pageHeight - 20); // Draw rectangle with margins
-  
-      // Add header with logo, title, and date
-      const imgWidth = 40;
-      const imgHeight = 40;
-      const imgX = (pageWidth - imgWidth) / 2; // Center horizontally
-      doc.addImage(logo, 'PNG', imgX, 15, imgWidth, imgHeight, undefined, 'FAST'); // Centered logo
-  
-      doc.setFontSize(14);
-      doc.text('Levaiggo Booking Report', pageWidth / 2, 70, { align: 'center' });
-      doc.setFontSize(10);
-      doc.text(`Generated on: ${currentDate}`, pageWidth / 2, 80, { align: 'center' });
-  
-      // Title and summary
+      
+      // Add title
+      doc.setFontSize(20);
+      doc.setTextColor(33, 150, 243);
+      doc.text("Package Management Report", pageWidth / 2, 20, { align: "center" });
+      
+      // Add report details
       doc.setFontSize(12);
-      doc.text(`Total Packages: ${packageCount}`, 10, 90);
-      doc.text(`Available Packages: ${availablePackagesCount}`, 10, 100);
-      doc.text(`Unavailable Packages: ${unavailablePackagesCount}`, 10, 110);
-      doc.text("Package Details:", 10, 120);
-  
-      // Table header
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Report generated on: ${new Date().toLocaleDateString()}`, 14, 35);
+      doc.text(`Total packages: ${packageCount}`, 14, 45);
+      
+      // Add table
       doc.autoTable({
-        startY: 130,
-        head: [
-          [
-            "#",
-            "Package Name",
-            "Price",
-            "Category",
-            "Discount",
-            "Availability",
-            "Duration",
-            "Max Customers",
-          ],
-        ],
-        body: packages.map((pkg, index) => [
-          index + 1,
+        startY: 55,
+        head: [["#", "Package", "Price", "Category", "Availability"]],
+        body: packages.map((pkg, i) => [
+          i + 1,
           pkg.packageName,
-          pkg.price,
+          `$${pkg.price}`,
           pkg.category,
-          pkg.discount,
-          pkg.availability ? "Available" : "Not Available",
-          pkg.duration,
-          pkg.maxCustomers,
+          pkg.availability ? "Available" : "Unavailable",
         ]),
-        theme: "striped",
+        theme: "grid",
+        headStyles: {
+          fillColor: [33, 150, 243],
+          textColor: 255,
+          fontStyle: "bold",
+        },
+        alternateRowStyles: { fillColor: [245, 245, 245] },
       });
-  
-      // Add footer with page number and signature area
-      const totalPages = doc.internal.getNumberOfPages();
-      for (let i = 1; i <= totalPages; i++) {
-        doc.setPage(i);
-        const pageNoText = `Page ${i} of ${totalPages}`;
-        doc.setFontSize(10);
-        doc.text(pageNoText, pageWidth / 2, pageHeight - 10, { align: 'center' });
-        doc.text('Authorized Signature: Pasindu ___________________', 14, pageHeight - 10);
-      }
-  
+
       // Save the PDF
       doc.save("package-report.pdf");
-  
-      Swal.fire({
-        icon: "success",
-        title: "Report Generated",
-        text: "The report has been generated successfully!",
-      });
-    } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "There was an error generating the report.",
-      });
-      console.error("Error generating report:", error);
-    }
+      Swal.fire("Success!", "Report generated successfully.", "success");
+    }, 1500);
   };
-  
+
   return (
-    <div style={{ display: "flex", height: "100vh", padding: "10px" }}>
-      {/* Dashboard Sidebar */}
-
-      {/* Main Content */}
-      <div
-        className="main-content bg-opacity-75"
-        style={{ flex: "1", padding: "20px", overflowY: "auto" }}
-      >
-        <div className="d-flex justify-content-center align-items-center vh-100 bg-opacity-75">
-          <div className="card shadow-lg" style={{ width: "100%" }}>
-            <div className="card-header text-center bg-dark text-white ">
-              <h2>All Package Details</h2>
-              <h5>Total Packages: {packageCount}</h5>
+    <div className="container py-4">
+      <Card className="shadow-lg">
+        {/* Card Header */}
+        <Card.Header className="bg-primary text-white">
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <h4 className="mb-0">
+                <FontAwesomeIcon icon={faBoxes} className="me-2" />
+                Package Management System
+              </h4>
+              <small className="opacity-75">Manage all your packages in one place</small>
             </div>
-            <div className="card-body">
-              <div className="text-center mb-3">
-                <Link to="/all-packages" className="btn btn-outline-info">
-                  <FontAwesomeIcon icon={faEye} /> View All Packages
-                </Link>
+            <Badge pill bg="light" text="primary" className="fs-6 px-3 py-2">
+              Total: {packageCount} packages
+            </Badge>
+          </div>
+        </Card.Header>
 
-                <Link
-                  to="/add-package"
-                  className="btn btn-outline-secondary ms-2"
+        {/* Card Body with Tabs */}
+        <Card.Body>
+          <Tabs
+            activeKey={activeTab}
+            onSelect={(k) => setActiveTab(k)}
+            className="mb-4"
+            fill
+          >
+            <Tab eventKey="packages" title="Packages List">
+              <div className="d-flex flex-wrap gap-3 mb-4">
+                <Button
+                  variant="outline-primary"
+                  onClick={fetchPackages}
+                  disabled={isLoading}
+                  className="action-button"
                 >
-                  <FontAwesomeIcon icon={faBoxes} /> Add New Package
+                  <FontAwesomeIcon
+                    icon={faRefresh}
+                    spin={isLoading}
+                    className="me-2"
+                  />
+                  {isLoading ? "Refreshing..." : "Refresh"}
+                </Button>
+                <Link to="/add-package" className="btn btn-outline-success action-button">
+                  <FontAwesomeIcon icon={faBoxes} className="me-2" />
+                  Add New Package
                 </Link>
+                <Button 
+                  variant="outline-info" 
+                  onClick={() => setActiveTab("analytics")}
+                  className="action-button"
+                >
+                  <FontAwesomeIcon icon={faChartPie} className="me-2" />
+                  View Analytics
+                </Button>
+                <Button 
+                  variant="outline-danger" 
+                  onClick={generateReport}
+                  className="action-button"
+                >
+                  <FontAwesomeIcon icon={faFilePdf} className="me-2" />
+                  Generate Report
+                </Button>
               </div>
 
-              <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-                <table className="table table-hover table-striped table-bordered">
-                  <thead className="thead-dark">
+              <div className="table-responsive" style={{ maxHeight: "50vh" }}>
+                <table className="table table-hover align-middle">
+                  <thead className="bg-light sticky-top">
                     <tr>
-                      <th>#</th>
+                      <th className="ps-4">#</th>
                       <th>Package Name</th>
                       <th>Price</th>
                       <th>Category</th>
                       <th>Discount</th>
-                      <th>Description</th>
                       <th>Availability</th>
-                      <th>Duration</th>
-                      <th>Max Customers</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {packages.map((pkg, index) => (
-                      <tr key={pkg._id} className="table-row">
-                        <td>{index + 1}</td>
-                        <td>{pkg.packageName}</td>
-                        <td>{pkg.price}</td>
-                        <td>{pkg.category}</td>
-                        <td>{pkg.discount}</td>
-                        <td>{pkg.description}</td>
+                      <tr key={pkg._id}>
+                        <td className="ps-4 fw-bold">{index + 1}</td>
                         <td>
-                          {pkg.availability ? "Available" : "Not Available"}
+                          <div className="d-flex align-items-center">
+                            <div className="ms-3">
+                              <p className="fw-bold mb-0">{pkg.packageName}</p>
+                              <p className="text-muted mb-0 small">
+                                <FontAwesomeIcon icon={faInfoCircle} className="me-1" />
+                                {pkg.description.substring(0, 30)}...
+                              </p>
+                            </div>
+                          </div>
                         </td>
-                        <td>{pkg.duration}</td>
-                        <td>{pkg.maxCustomers}</td>
                         <td>
-                          <div className="btn-group">
+                          <span className="badge bg-success bg-opacity-10 text-success fs-6">
+                            ${pkg.price}
+                          </span>
+                        </td>
+                        <td>
+                          <span className="badge bg-info bg-opacity-10 text-info">
+                            {pkg.category}
+                          </span>
+                        </td>
+                        <td>{pkg.discount}%</td>
+                        <td>
+                          <span
+                            className={`badge ${
+                              pkg.availability
+                                ? "bg-success"
+                                : "bg-secondary"
+                            }`}
+                          >
+                            {pkg.availability ? "Available" : "Unavailable"}
+                          </span>
+                        </td>
+                        <td>
+                          <div className="d-flex gap-2">
                             <Link
                               to={`/view-package/${pkg._id}`}
-                              className="btn btn-outline-success"
-                              title="View"
+                              className="btn btn-sm btn-primary action-icon"
+                              data-tooltip-id="view-tooltip"
+                              data-tooltip-content="View Details"
                             >
-                              <FontAwesomeIcon
-                                icon={faEye}
-                                className="icon-hover"
-                                data-tooltip-id={`view-tooltip-${pkg._id}`}
-                              />
-                              <Tooltip
-                                id={`view-tooltip-${pkg._id}`}
-                                place="top"
-                                effect="solid"
-                              >
-                                View Package
-                              </Tooltip>
+                              <FontAwesomeIcon icon={faEye} />
                             </Link>
-
                             <Link
                               to={`/update-package/${pkg._id}`}
-                              className="btn btn-outline-primary"
-                              title="Edit"
+                              className="btn btn-sm btn-warning action-icon"
+                              data-tooltip-id="edit-tooltip"
+                              data-tooltip-content="Edit Package"
                             >
-                              <FontAwesomeIcon
-                                icon={faPencilAlt}
-                                className="icon-hover"
-                                data-tooltip-id={`edit-tooltip-${pkg._id}`}
-                              />
-                              <Tooltip
-                                id={`edit-tooltip-${pkg._id}`}
-                                place="top"
-                                effect="solid"
-                              >
-                                Edit Package
-                              </Tooltip>
+                              <FontAwesomeIcon icon={faPencilAlt} />
                             </Link>
-
                             <button
-                              className="btn btn-outline-danger"
+                              className="btn btn-sm btn-danger action-icon"
                               onClick={() => handleDelete(pkg._id)}
-                              title="Delete"
+                              data-tooltip-id="delete-tooltip"
+                              data-tooltip-content="Delete Package"
                             >
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                className="icon-hover"
-                                data-tooltip-id={`delete-tooltip-${pkg._id}`}
-                              />
-                              <Tooltip
-                                id={`delete-tooltip-${pkg._id}`}
-                                place="top"
-                                effect="solid"
-                              >
-                                Delete Package
-                              </Tooltip>
+                              <FontAwesomeIcon icon={faTrash} />
                             </button>
                           </div>
                         </td>
@@ -371,67 +327,114 @@ const AllPackages = () => {
                     ))}
                   </tbody>
                 </table>
+                <Tooltip id="view-tooltip" place="top" effect="solid" />
+                <Tooltip id="edit-tooltip" place="top" effect="solid" />
+                <Tooltip id="delete-tooltip" place="top" effect="solid" />
               </div>
-              <div className="text-center mt-4">
-  <Button
-    onClick={() => setShowCharts(!showCharts)}
-    variant="primary"
-    className="custom-button"
-  >
-    {showCharts ? "Hide Charts" : "Show Charts"}
-  </Button>
-  <Button
-    onClick={generateReport}
-    variant="success"
-    className="custom-button ms-2"
-  >
-    Generate Report
-  </Button>
-</div>
+            </Tab>
 
-            </div>
-          </div>
-        </div>
-      </div>
+            <Tab eventKey="analytics" title="Analytics">
+              <div className="row mt-3">
+                <div className="col-md-6 mb-4">
+                  <Card className="h-100">
+                    <Card.Header className="bg-light">
+                      <h5 className="mb-0 text-center">Package Availability</h5>
+                    </Card.Header>
+                    <Card.Body>
+                      <div style={{ height: "300px" }}>
+                        <Pie
+                          data={availabilityData}
+                          options={{
+                            plugins: {
+                              legend: { position: "bottom" },
+                            },
+                            maintainAspectRatio: false,
+                          }}
+                        />
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div>
+                <div className="col-md-6 mb-4">
+                  <Card className="h-100">
+                    <Card.Header className="bg-light">
+                      <h5 className="mb-0 text-center">Price Distribution</h5>
+                    </Card.Header>
+                    <Card.Body>
+                      <div style={{ height: "300px" }}>
+                        <Bar
+                          data={priceRangeData}
+                          options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                              y: {
+                                beginAtZero: true,
+                                grid: { drawBorder: false },
+                              },
+                              x: { grid: { display: false } },
+                            },
+                            plugins: {
+                              legend: { display: false },
+                            },
+                          }}
+                        />
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </div>
+            </Tab>
+          </Tabs>
+        </Card.Body>
 
-      {/* Modal for displaying charts */}
-      <Modal show={showCharts} onHide={() => setShowCharts(false)} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>Package Analysis</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              flexWrap: "wrap",
-            }}
-          >
-            <div style={{ width: "35%" }}>
-              <h5>Package Availability</h5>
-              <Pie data={availabilityData} />
-            </div>
-            <div style={{ width: "35%" }}>
-              <h5>Overall Distribution</h5>
-              <Pie data={pieData} />
-            </div>
-            <div style={{ width: "45%", marginTop: "20px" }}>
-              <h5>Price Range</h5>
-              <Bar
-                data={minMaxPriceData}
-                options={{
-                  responsive: true,
-                  scales: {
-                    x: { beginAtZero: true },
-                    y: { beginAtZero: true },
-                  },
-                }}
-              />
-            </div>
+        {/* Card Footer */}
+        <Card.Footer className="bg-light text-muted small">
+          <div className="d-flex justify-content-between">
+            <div>Last updated: {new Date().toLocaleString()}</div>
+            <div>Total records: {packageCount}</div>
           </div>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
+        </Card.Footer>
+      </Card>
+
+      {/* Custom CSS for button visibility */}
+      <style jsx>{`
+        .action-button {
+          min-width: 160px;
+          transition: all 0.2s ease;
+          border-width: 2px;
+        }
+        .action-icon {
+          width: 34px;
+          height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          transition: all 0.2s ease;
+          opacity: 1 !important;
+          border: 2px solid transparent;
+        }
+        .action-icon:hover {
+          transform: scale(1.1);
+        }
+        .btn-outline-primary {
+          color: #0d6efd;
+          border-color: #0d6efd;
+        }
+        .btn-outline-success {
+          color: #198754;
+          border-color: #198754;
+        }
+        .btn-outline-info {
+          color: #0dcaf0;
+          border-color: #0dcaf0;
+        }
+        .btn-outline-danger {
+          color: #dc3545;
+          border-color: #dc3545;
+        }
+      `}</style>
     </div>
   );
 };

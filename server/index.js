@@ -3,8 +3,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const ServiceModel = require("./Models/Services");
 const InventoryModel = require("./Models/Inventory");
+const router = express.Router();
 const http = require("http");
 const { HfInference } = require('@huggingface/inference');
+const client = require('./whatsappClient');
+const moment = require('moment');
 
 const axios = require('axios');
 require('dotenv').config();    // For environment variables
@@ -168,11 +171,105 @@ app.delete("/deleteService/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-app.post("/createService", (req, res) => {
-  ServiceModel.create(req.body)
-    .then((services) => res.json(services))
-    .catch((err) => res.json(err));
+app.post("/createService", async (req, res) => {
+  try {
+    const serviceData = req.body;
+
+    // Save to DB
+    const savedService = await ServiceModel.create(serviceData);
+
+    // Format WhatsApp number (remove leading 0, add country code like '94' for Sri Lanka)
+    const rawNumber = serviceData.whatsappNumber || "";
+    const formattedNumber = "94" + rawNumber.slice(1) + "@c.us";
+
+    // Function to calculate next service date based on service type
+    const calculateNextServiceDate = (serviceType, currentDate) => {
+      const date = new Date(currentDate);
+      
+      switch(serviceType) {
+        case 'Change Oil':
+          date.setMonth(date.getMonth() + 3); // Next oil change in 3 months
+          break;
+        case 'Full Interior Service':
+          date.setMonth(date.getMonth() + 6); // Next interior service in 6 months
+          break;
+        case 'Full Exterior Service':
+          date.setMonth(date.getMonth() + 3); // Next exterior service in 3 months
+          break;
+        case 'Wheel Alignment':
+          date.setMonth(date.getMonth() + 12); // Next wheel alignment in 12 months
+          break;
+        case 'Fluid Checks and Replacement':
+          date.setMonth(date.getMonth() + 6); // Next fluid check in 6 months
+          break;
+        case 'Battery Services':
+          date.setMonth(date.getMonth() + 12); // Next battery service in 12 months
+          break;
+        case 'Transmission Services':
+          date.setMonth(date.getMonth() + 24); // Next transmission service in 24 months
+          break;
+        case 'Exhaust System Repair':
+          date.setMonth(date.getMonth() + 12); // Next inspection in 12 months
+          break;
+        case 'Air Conditioning/Heating Repair':
+          date.setMonth(date.getMonth() + 12); // Next AC check in 12 months
+          break;
+        default:
+          date.setMonth(date.getMonth() + 6); // Default to 6 months for other services
+      }
+
+      return date.toISOString().split('T')[0];
+    };
+
+    // Calculate next recommended service date
+    const nextServiceDate = calculateNextServiceDate(serviceData.service, serviceData.date);
+
+    // Create detailed message
+    const message = `
+🚗 *LEVAGGIO SERVICE CONFIRMATION* 🚗
+
+Dear Customer,
+
+Thank you for choosing *LEVAGGIO* for your vehicle service needs!
+
+*SERVICE DETAILS:*
+📝 Service ID: ${serviceData.serviceId}
+🔧 Service Type: ${serviceData.service}
+📅 Service Date: ${serviceData.date}
+🚘 Vehicle Number: ${serviceData.vin}
+💰 Service Cost: Rs. ${serviceData.price}
+
+*PARTS USED:*
+⚙️ ${serviceData.parts} (Quantity: ${serviceData.quantity})
+
+*TECHNICIAN'S NOTE:*
+🔍 "${serviceData.notes || 'N/A'}"
+
+*NEXT SERVICE RECOMMENDATION:*
+📅 We recommend scheduling your next ${serviceData.service} around ${nextServiceDate}.
+
+*CURRENT STATUS:*
+🚦 ${serviceData.status === 'completed' ? 'Completed ✅' : 'In Progress ⏳'}
+
+If you have any questions, feel free to contact our support at (+94) 77 123 4567 or reply to this message.
+
+Thank you for trusting *LEVAGGIO*.
+
+Drive safe and stay confident! 🏁  
+*LEVAGGIO TEAM*
+`;
+
+    // Send WhatsApp message
+    await client.sendMessage(formattedNumber, message);
+
+    res.json({ success: true, data: savedService });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Service creation or message sending failed.' });
+  }
 });
+
 
 const UserModel = require("./Models/Users");
 const Attendance = require("./Models/Attendance"); // Import Attendance model

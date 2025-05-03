@@ -16,6 +16,7 @@ function CreateService() {
   const [parts, setParts] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState('');
+  const [whatsappNumber, setWhatsappNumber] = useState('');
   const [status, setStatus] = useState('in-progress');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function CreateService() {
     const alphanumericPattern = /^[a-zA-Z0-9-\s]+$/;
     const pricePattern = /^[0-9]+(\.[0-9]{1,2})?$/; 
     const vinPattern = /^(?:[A-Z]{2,3}-\d{4}|[A-Z]{2,3}\d{4})$/;
+    const whatsappPattern = /^\d{10}$/;
 
     if (!serviceId) newErrors.serviceId = "Service ID is required.";
     if (!service) newErrors.service = "Service is required.";
@@ -45,6 +47,11 @@ function CreateService() {
     }
     if (!parts) newErrors.parts = "Parts Used is required.";
     if (!notes) newErrors.notes = "Technician's Note is required.";
+    if (!whatsappNumber) {
+      newErrors.whatsappNumber = "WhatsApp Number is required.";
+    } else if (!whatsappPattern.test(whatsappNumber)) {
+      newErrors.whatsappNumber = "WhatsApp Number must be exactly 10 digits.";
+    }
 
     return newErrors;
   };
@@ -89,6 +96,7 @@ function CreateService() {
       parts, 
       quantity: Number(quantity),
       notes,
+      whatsappNumber,
       status 
     })
     .then(result => { 
@@ -128,7 +136,7 @@ function CreateService() {
             Service Records Section
           </h2>
           <h5 style={{ textAlign: 'left', marginBottom: '1rem', color: '#b3202e', fontFamily: "'Poppins', sans-serif", fontWeight: 'bold' }}>
-            Car’s Story Starts Here: Add Service Records!
+            Car's Story Starts Here: Add Service Records!
           </h5>
           
           <br />
@@ -225,9 +233,6 @@ function CreateService() {
                 <option value="">Select Parts</option>
                 {/* Add your parts options here */}
                 <option value="Oil Filters">Oil Filters</option>
-                <option value="Oil Filters">Oil Filters</option>
-                <option value="">Select Parts</option>
-                <option value="Oil Filters">Oil Filters</option>
                 <option value="Air Filters">Air Filters</option>
                 <option value="Spark Plugs">Spark Plugs</option>
                 <option value="Timing Belts/Chains">Timing Belts/Chains</option>
@@ -261,6 +266,25 @@ function CreateService() {
                 min="1"
               />
             </div>
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="whatsappNumber" className="form-label">WhatsApp Number</label>
+            <input
+              type="text"
+              className="form-control"
+              id="whatsappNumber"
+              placeholder="Enter 10-digit WhatsApp number"
+              autoComplete='off'
+              value={whatsappNumber}
+              onChange={(e) => {
+                // Allow only digits and limit to 10 characters
+                const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                setWhatsappNumber(value);
+                setErrors({ ...errors, whatsappNumber: undefined });
+              }}
+            />
+            {errors.whatsappNumber && <div className="text-danger">{errors.whatsappNumber}</div>}
           </div>
 
           <div className="row mb-3">
