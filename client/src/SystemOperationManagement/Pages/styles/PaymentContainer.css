@@ -1,0 +1,39 @@
+.payment-container {
+    max-width: 400px; /* Controls the maximum width of the container */
+    margin: 0 auto; /* Centers the container horizontally */
+    padding: 20px; /* Adds padding inside the container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures the container takes up the full viewport height */
+  }
+  
+  .payment-card {
+    width: 100%;
+    padding: 20px; /* Adds padding inside the card */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    font-size: 1.5rem; /* Adjusts font size of the heading */
+  }
+  
+  h5 {
+    font-size: 1.2rem; /* Adjusts font size of the package name */
+  }
+  
+  p {
+    font-size: 0.9rem; /* Adjusts font size of the text inside the card */
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,18 @@
+/* AdminDashboard.css */
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.card {
+  border-radius: 8px;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.table {
+  margin-bottom: 0;
+}

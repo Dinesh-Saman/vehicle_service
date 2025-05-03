@@ -1,0 +1,266 @@
+body {
+  background-color: #f7f9fc; /* Soft background color */
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  margin: 0; /* Remove default margin */
+  padding: 20px; /* Add padding to body */
+}
+
+.parts-usage-container {
+  max-width: 800px; /* Max width for the container */
+  margin: auto; /* Center the container */
+  padding: 30px; /* Add padding */
+  background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Gradient background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  position: relative; /* Positioning for dropdown */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation on hover */
+}
+
+.parts-usage-container:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.parts-usage-header {
+  font-size: 28px; /* Header size */
+  font-weight: 700; /* Bold */
+  color: #333; /* Dark color for text */
+  margin-bottom: 20px; /* Margin below header */
+  text-align: center; /* Centered text */
+  letter-spacing: 1px; /* Spacing for modern look */
+}
+
+.parts-usage-table {
+  overflow-x: auto; /* Allow horizontal scrolling on small screens */
+  margin-top: 20px; /* Space above the table */
+}
+
+.parts-usage-table table {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Collapse borders */
+  border-radius: 10px; /* Rounded table */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.parts-usage-table th,
+.parts-usage-table td {
+  padding: 16px; /* Increased padding for cells */
+  text-align: left; /* Left align text */
+  border: 1px solid #e0e0e0; /* Light border */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+}
+
+.parts-usage-table th {
+  background-color: #4a4a4a; /* Dark header background */
+  color: #ffffff; /* White text for header */
+}
+
+.parts-usage-table tr {
+  background-color: #ffffff; /* White for rows */
+}
+
+.parts-usage-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+.parts-usage-table tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+  transform: scale(1.02); /* Slight scale effect on hover */
+}
+
+.part-name {
+  font-weight: 500; /* Medium weight for part names */
+  color: #2c3e50; /* Dark color */
+  transition: color 0.3s; /* Color transition */
+}
+
+.part-name:hover {
+  color: #b3202e; /* Color change on hover */
+}
+
+.date-quantity {
+  color: #555; /* Dark gray for date and quantity */
+}
+
+.date-quantity-list {
+  list-style: none; /* Remove list bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+.date-quantity-list li {
+  padding: 4px 0; /* Padding for list items */
+  border-bottom: 1px solid #e0e0e0; /* Border between items */
+}
+
+.date-quantity-list li:last-child {
+  border: none; /* Remove border from last item */
+}
+
+.download-button {
+  background-color: #b3202e; /* Button color */
+  color: white; /* Button text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 12px 24px; /* Button padding */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+  margin-top: 20px; /* Space above button */
+  display: block; /* Center button */
+  width: 200px; /* Button width */
+  margin-left: auto; /* Center align */
+  margin-right: auto; /* Center align */
+}
+
+.download-button:hover {
+  background-color: #911e32; /* Darker red on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.download-button:active {
+  transform: translateY(0); /* Reset on click */
+  box-shadow: none; /* Remove shadow */
+}
+
+/* Dropdown styles */
+.dropdown-menu {
+  position: absolute; /* Positioning */
+  background-color: white; /* Background color */
+  border: 1px solid #ddd; /* Border */
+  padding: 10px; /* Padding */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Shadow */
+  opacity: 0; /* Initially hidden */
+  transform: translateY(-10px) scale(0.95); /* Initial transform */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.dropdown-menu.show {
+  opacity: 1; /* Show dropdown */
+  transform: translateY(0) scale(1); /* Reset transform */
+}
+
+.dropdown-menu ul {
+  list-style: none; /* Remove bullets */
+  padding: 0; /* No padding */
+  margin: 0; /* No margin */
+}
+
+.dropdown-menu li {
+  padding: 10px; /* Padding for items */
+}
+
+.dropdown-menu li a {
+  text-decoration: none; /* No underline */
+  color: #333; /* Text color */
+  transition: color 0.3s; /* Color transition */
+}
+
+.dropdown-menu li a:hover {
+  color: #b3202e; /* Change color on hover */
+}
+
+/* Dropdown icon styles */
+.dropdown-icon {
+  cursor: pointer; /* Pointer on hover */
+  font-size: 24px; /* Icon size */
+  color: #b3202e; /* Icon color */
+  position: relative; /* Positioning */
+  margin-left: auto; /* Align right */
+}
+
+
+.dropdown-menu {
+  position: absolute; /* Positioning */
+  background-color: white; /* Background color */
+  border: 1px solid #ddd; /* Border */
+  padding: 10px; /* Padding */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Shadow */
+  z-index: 1000; /* Ensure it's above other elements */
+  display: none; /* Initially hidden */
+}
+
+.dropdown-menu.show {
+  display: block; /* Show dropdown when active */
+}
+
+.dropdown-icon {
+  cursor: pointer; /* Pointer on hover */
+  font-size: 24px; /* Icon size */
+  color: #b3202e; /* Icon color */
+  position: relative; /* Positioning */
+  margin-left: auto; /* Align right */
+}
+
+
+.dropdown-menu {
+  position: absolute; /* Positioning */
+  background-color: white; /* Background color */
+  border: 1px solid #ddd; /* Border */
+  padding: 10px; /* Padding */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Shadow */
+  z-index: 1000; /* Ensure it's above other elements */
+  opacity: 0; /* Initially hidden */
+  transform: translateY(-10px) scale(0.95); /* Initial transform */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.dropdown-menu.show {
+  opacity: 1; /* Show dropdown */
+  transform: translateY(0) scale(1); /* Reset transform */
+  display: block; /* Ensure it takes up space */
+}
+
+
+.date-picker-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* Space above and below */
+}
+
+.date-picker-container input {
+  padding: 12px; /* Increased padding for a comfortable feel */
+  margin: 0 10px; /* Space between inputs */
+  border: 1px solid #b3202e; /* Border color matching your preference */
+  border-radius: 4px; /* Rounded corners */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.3s; /* Smooth transition for focus */
+  font-size: 16px; /* Font size for better readability */
+  width: 150px; /* Fixed width for uniformity */
+}
+
+.date-picker-container input:focus {
+  border-color: #b3202e; /* Highlight border color on focus */
+  box-shadow: 0 0 5px rgba(179, 32, 46, 0.5); /* Subtle shadow on focus */
+}
+
+/* Optional: Add a hover effect */
+.date-picker-container input:hover {
+  border-color: #b3202e; /* Border color on hover */
+}
+
+
+.email-button {
+  background-color: #b3202e; /* Dark red background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding around the text */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  margin-top: 10px; /* Space above the button */
+}
+
+.email-button:hover {
+  background-color: #a61d2a; /* Darker red on hover */
+}
+
+.email-button:focus {
+  outline: none; /* Remove outline on focus */
+}
+
+.email-button:active {
+  transform: scale(0.95); /* Slightly shrink button when clicked */
+}

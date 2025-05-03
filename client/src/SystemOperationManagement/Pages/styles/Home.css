@@ -1,0 +1,203 @@
+/* src/styles/Home.css */
+
+/* Hero Section Styling */
+/* Hero Section Styling */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease; /* Smooth transition between images */
+}
+
+
+/* No need for backgroundTransition animation as we're using JS for this */
+
+/* Ensure other styles remain the same */
+
+
+
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  padding-top: 200px;
+}
+
+.hero-content h1 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+}
+
+.hero-content .btn {
+  font-size: 1.3em;
+  padding: 12px 30px;
+  background-color: #d21919;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.hero-content .btn:hover {
+  background-color: #a61616;
+}
+
+/* Dark Overlay for better text readability */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* Services Section Styling */
+.services-section {
+  margin-top: 50px;
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+}
+
+.services-section .section-title {
+  font-size: 2.8em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.services-section .section-description {
+  font-size: 1.4em;
+  color: #666;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.services-section .card {
+  margin-bottom: 30px;
+  border-radius: 12px;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.services-section .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.services-section .card-body {
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.services-section .card-title {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #d21919;
+}
+
+.services-section .card-text {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.services-section .btn {
+  font-size: 1.2em;
+  padding: 10px 20px;
+  background-color: #d21919;
+  color: #ffffff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.services-section .btn:hover {
+  background-color: #a61616;
+}
+
+/* Contact Us Section */
+.contact-section {
+  padding: 60px 20px;
+  background-color: #333;
+  color: #ffffff;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2.8em;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.contact-section p {
+  font-size: 1.4em;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+.contact-section .btn {
+  font-size: 1.3em;
+  padding: 12px 30px;
+  background-color: #d21919;
+  color: #ffffff;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-section .btn:hover {
+  background-color: #a61616;
+}
+
+/* Navbar Styling */
+.navbar-nav .nav-link {
+  font-family: 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #d21919;
+}
+
+/* Styling for the navbar links on hover */
+.navbar-nav .nav-link:hover {
+  color: #d21919 !important;
+}
+
+/* Background for navbar */
+.navbar {
+  background-color: #333;
+  padding: 15px 20px;
+}
+
+/* Footer Section Styling */
+footer {
+  background-color: #111;
+  color: #ddd;
+  padding: 20px;
+  text-align: center;
+}
+
+footer a {
+  color: #d21919;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #a61616;
+}

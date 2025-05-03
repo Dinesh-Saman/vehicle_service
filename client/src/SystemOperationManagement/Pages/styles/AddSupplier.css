@@ -1,0 +1,44 @@
+/* Style the dropdown list */
+.dropdown-menu {
+    max-height: 200px; /* Set a fixed height to allow scrolling */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa; /* Light background */
+    padding: 5px;
+}
+
+/* Add a nice hover effect */
+.dropdown-item:hover {
+    background-color: #007bff; /* Highlight background color */
+    color: #fff; /* White text on hover */
+}
+
+/* Custom button style */
+.btn-secondary {
+    background-color: #6c757d; /* Darker grey */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Icon styling */
+.icon-color {
+    color: #007bff; /* Custom color for icons */
+}
+
+/* Custom scrollbar styling (optional for better UX) */
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Scrollbar thumb color */
+    border-radius: 5px;
+}

@@ -1,0 +1,217 @@
+/* Import a beautiful font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body,html {
+  font-family: 'Roboto', sans-serif; /* Apply the imported font */
+  height: 100%; /* Ensure the body and html take up the full height of the viewport */
+  margin: 0; /* Remove any default margin */
+  padding: 0; /* Remove any default padding */
+  background-image: url('../../Pages/images/carrapaire.jpg');
+  background-size: cover; /* Ensure the image covers the whole page */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed; /* Ensure the image stays fixed while scrolling */
+}
+
+.container {
+  text-align: center; /* Center the text */
+}
+.package-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #d21919; /* Border color */
+  border-radius: 10px; /* Round the corners */
+  max-width: 300px;
+  height: 450px; /* Set a fixed height */
+  margin: 20px auto; /* Center the card and add space around */
+  display: flex;
+  flex-direction: column; /* Align content vertically */
+  align-items: center; /* Center content horizontally */
+  padding: 1rem; /* Padding inside the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.8); /* Add transparency to the card background */
+}
+
+.package-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  background-color: rgba(85, 211, 186, 0.9); /* Slightly reduce transparency on hover */
+}
+
+.card-img-top {
+  height: 150px;
+  width: 100%; /* Ensure image takes full width */
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-body {
+  padding: 1rem; /* Adjust padding inside the card body */
+  flex: 1; /* Allow the card body to expand */
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+
+.card-text .highlight {
+  color: #e74c3c; /* Highlight color for discount */
+  font-weight: bold;
+}
+
+/* Container for search and filters to be in the same line */
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  gap: 10px; /* Space between search bar and filters */
+  margin-bottom: 30px; /* Adjust as needed */
+}
+
+.search-filter-container .input-group {
+  flex: 1; /* Allow search bar to take available space */
+  max-width: 400px; /* Limit the width */
+  max-height: 2px;
+}
+
+.search-filter-container .form-select {
+  max-width: 200px; /* Limit the width */
+}
+
+/* Scrollable container */
+.scrollable-container {
+  overflow-x: auto;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Move up */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.package-card {
+  animation: float 3s ease-in-out infinite; /* Floating effect */
+}
+
+.separator-line {
+  width: 260px; /* Make the line span the full width of its container */
+  border: none; /* Remove default border */
+  border-top: 2px solid #000000; /* Add a top border as the separator line */
+  margin: 1rem 0; /* Space above and below the separator line */
+}
+
+.modal-dialog {
+  max-width: 40%; /* Increase width of the modal */
+}
+
+.modal-content {
+  max-height: 500px; /* Minimize the height of the modal */
+  overflow-y: auto; /* Add scrollbar if content exceeds max-height */
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.payment-icon {
+  margin: 0 10px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+
+
+
+
+.card-type-icons {
+  display: flex;
+  gap: 20px; /* Spacing between card type icons */
+}
+
+.card-type {
+  display: flex;
+  flex-direction: column; /* Stack the icon and label vertically */
+  align-items: center; /* Center align items */
+}
+
+.card-type-icon {
+  font-size: 40px; /* Set size for card icons */
+  color: #99bc39; /* Set icon color */
+}
+
+.card-type-label {
+  margin-top: 5px; /* Space between icon and label */
+  font-size: 14px; /* Set label font size */
+  font-weight: bold; /* Make the label bold */
+  color: #414ea7; /* Set label color */
+}
+
+.bank-icons {
+  display: flex;
+  gap: 20px; /* Spacing between bank icons */
+}
+
+.bank-icon {
+  display: flex;
+  flex-direction: column; /* Stack the icon and label vertically */
+  align-items: center; /* Center align items */
+}
+
+.bank-icon-image {
+  font-size: 40px; /* Set size for bank icons */
+  color: #5f0eaa; /* Set icon color */
+}
+
+.bank-icon span {
+  margin-top: 5px; /* Space between icon and label */
+  font-size: 14px; /* Set label font size */
+  font-weight: bold; /* Make the label bold */
+  color: #333333; /* Set label color */
+}
+
+.packages-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.packages-container h2 {
+  text-align: center;
+  color: #333;
+}
+
+.package-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.package-list li {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  position: relative;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.package-list li.highlight {
+  background-color: #fff3cd; /* Highlight color */
+  border-color: #ffeeba; /* Border color for highlighted packages */
+}

@@ -1,0 +1,21 @@
+.glass-effect {
+    background: rgba(235, 97, 97, 0.7); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Adds a blur effect to the background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+    padding: 20px;
+}
+/* CSS for colorful icons */
+.icon-color {
+    color: #007bff; /* Blue color for icons, adjust as needed */
+}
+
+/* Underline style for the title */
+.title-underline {
+    position: absolute;
+    bottom: -5px; /* Adjust based on your layout */
+    width: 100%;
+    height: 2px;
+    background-color: #007bff; /* Adjust color as needed */
+    border-radius: 2px;
+}

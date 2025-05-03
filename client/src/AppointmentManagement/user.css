@@ -1,0 +1,38 @@
+body {
+    background-color: #f8f9fa; /* Light background for better contrast */
+  }
+  
+  .background {
+    background: linear-gradient(to right, #4facfe, #00f2fe); /* Attractive gradient background */
+  }
+  
+  .container {
+    max-width: 1200px; /* Set max width for the container */
+    margin: auto; /* Center the container */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Add padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+  
+  .table-responsive {
+    max-height: 00px; /* Limit the height of the table container */
+    overflow-y: auto; /* Enable scrolling if the content exceeds the height */
+  }
+  
+  .table {
+    font-size: 14px; /* Set a readable font size */
+  }
+  
+  .table th {
+    background-color: #343a40; /* Dark header background */
+    color: white; /* White text for header */
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+  }
+  
+  .btn {
+    border-radius: 5px; /* Rounded button corners */
+  }
+  

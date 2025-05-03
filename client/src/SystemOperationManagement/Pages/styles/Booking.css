@@ -1,0 +1,35 @@
+.booking-container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .package-details {
+    background-color: #f8f9fa;
+  }
+  
+  .payment-methods .payment-method {
+    cursor: pointer;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s, border-color 0.3s;
+    text-align: center;
+  }
+  
+  .payment-methods .payment-method.selected {
+    background-color: #e9ecef;
+    border-color: #007bff;
+  }
+  
+  .payment-methods .payment-method p {
+    margin: 0;
+  }
+  
+  .payment-form .form-control.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .payment-form .invalid-feedback {
+    display: block;
+  }
+  

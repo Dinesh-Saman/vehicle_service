@@ -1,0 +1,31 @@
+.search-form {
+    width: 300px; /* Adjust as needed */
+    align-items: center;
+    margin-top: 5px;
+  }
+  
+  .search-input {
+    height: 40px; /* Set desired height */
+    border: 1px solid #3498db; /* Border color matching the brand color */
+    border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+    padding: 0 10px; /* Padding inside the input */
+    transition: all 0.3s; /* Transition for hover effect */
+  }
+  
+  .search-input:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Shadow on focus */
+  }
+  
+  .btn-outline-success {
+    height: 40px; /* Match height of the input */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+    background-color: #3498db; /* Change button background color */
+    color: white; /* Text color */
+    transition: background-color 0.3s; /* Transition for hover effect */
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+  }
+  

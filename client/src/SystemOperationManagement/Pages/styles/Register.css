@@ -1,0 +1,27 @@
+/* Register.css */
+body {
+  background: #f8f9fa; /* Light background color */
+}
+
+.card {
+  background: #ffffff; /* White background for the card */
+  border-radius: 8px; /* Rounded corners for the card */
+  border: none; /* Remove border */
+}
+
+.card-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Custom shadow */
+}
+
+.form-label {
+  font-weight: 500; /* Slightly bolder labels */
+}
+
+.btn-link {
+  color: #007bff; /* Bootstrap primary color for links */
+  text-decoration: none; /* Remove underline from link */
+}
+
+.btn-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}

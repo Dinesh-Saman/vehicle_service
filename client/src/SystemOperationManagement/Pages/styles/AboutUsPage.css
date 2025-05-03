@@ -1,0 +1,35 @@
+.about-description {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 20px 0;
+  }
+  
+  .about-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  
+  .about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .about-icon {
+    margin-bottom: 15px;
+  }
+  
+  .about-title {
+    font-size: 1.5rem;
+    color: #333; /* Dark text */
+  }
+  
+  .about-text {
+    font-size: 1rem;
+    color: #666; /* Gray text */
+  }
+  

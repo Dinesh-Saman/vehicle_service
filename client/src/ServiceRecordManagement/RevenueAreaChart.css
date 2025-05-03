@@ -1,0 +1,67 @@
+/* Chart Container Styles */
+.revenue-chart-container {
+  max-width: 1200px; /* Set a maximum width for the chart */
+  height: fit-content;
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 10px; /* Rounded corners */
+  margin-top: 100px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding-bottom: 40px; /* Ensure space for the button below the chart */
+  transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s; /* Transition for scale, shadow, and opacity effects */
+}
+
+/* Add hover effect for the chart container */
+.revenue-chart-container:hover {
+  transform: scale(1.02); /* Scale up slightly on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  opacity: 0.9; /* Slightly reduce opacity for a dissolve effect */
+}
+
+/* Title styles */
+.revenue-chart-title {
+  text-align: center; /* Center the title */
+  font-size: 24px; /* Font size */
+  font-weight: bold; /* Bold font */
+  margin-bottom: 20px; /* Space below the title */
+  color: #333; /* Darker text color */
+  font-family: 'Poppins', sans-serif; /* Font family */
+}
+
+/* Button styles */
+.revenue-download-button {
+  display: block; /* Make the button a block element */
+  margin: 20px auto; /* Center the button horizontally */
+  padding: 10px 20px; /* Button padding */
+  background-color: #b3202e; /* Button color */
+  color: #fff; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  font-size: 16px; /* Font size */
+  font-family: 'Poppins', sans-serif; /* Font family */
+  transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */
+}
+
+/* Button hover effect */
+.revenue-download-button:hover {
+  background-color: #a91f26; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .revenue-chart-container {
+    padding: 15px; /* Less padding on smaller screens */
+  }
+
+  .revenue-chart-title {
+    font-size: 20px; /* Smaller title on mobile */
+  }
+
+  .revenue-download-button {
+    font-size: 14px; /* Smaller button text */
+  }
+}

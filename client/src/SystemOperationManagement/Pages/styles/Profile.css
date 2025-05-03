@@ -1,0 +1,86 @@
+.profile-card {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  background: rgba(240, 241, 244, 0.8); /* Semi-transparent background */
+}
+
+.profile-card:hover {
+  transform: scale(1.02);
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  background: rgba(76, 238, 211, 0.8); 
+}
+
+.dashboard-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dashboard-item {
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  background-color: rgba(212, 229, 232, 0.9); /* More transparency */
+  transition: box-shadow 0.2s;
+}
+
+.dashboard-item:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.settings {
+  margin-top: 20px;
+}
+
+.settings button {
+  margin-right: 10px;
+}
+
+/* New styles for buttons */
+.beautiful-btn {
+  border-radius: 25px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.beautiful-btn:hover {
+  background-color: rgba(0, 123, 255, 0.7); /* Lighten on hover */
+  transform: scale(1.05);
+}
+
+/* Styles for input fields */
+.form-control {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent input fields */
+  transition: background-color 0.3s;
+}
+
+.form-control:focus {
+  background-color: rgba(255, 255, 255, 1); /* Solid on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow on focus */
+}
+
+/* Package details styles */
+.package-details {
+  background-color: rgba(0, 123, 255, 0.1); /* Light background for package details */
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.card-body {
+  padding: 15px; /* Adjust padding for the card */
+}
+
+.icon-color {
+  color: white; /* Ensures the icons are visible on colored backgrounds */
+}
+
+.dashboard-title {
+  color: #333; /* Optional: Change the title color */
+}

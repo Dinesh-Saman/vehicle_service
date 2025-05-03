@@ -1,0 +1,65 @@
+/* styles/viewpackages.css */
+.container {
+    padding: 20px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+  }
+  
+  .card-header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0; /* Rounded corners on the top */
+  }
+  
+  .table {
+    width: 100%; /* Ensure table takes full width of the card */
+    margin: 0; /* Remove margin for better fit */
+  }
+  
+  .table th, .table td {
+    text-align: center; /* Center-align text */
+    padding: 12px; /* Adequate padding for readability */
+  }
+  
+  .table thead {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f5f5f5; /* Subtle hover effect */
+  }
+  
+  .table-bordered {
+    border: 1px solid #ddd; /* Border around the table */
+  }
+  
+  .btn-group .btn {
+    border-radius: 5px; /* Rounded corners for buttons */
+    margin: 2px; /* Margin between buttons */
+  }
+  
+  .btn-outline-success, .btn-outline-primary, .btn-outline-danger {
+    border: 1px solid;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  

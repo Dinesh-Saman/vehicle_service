@@ -1,0 +1,525 @@
+/* Main Container */
+.view-all-packages-container {
+    min-height: 100vh;
+    padding: 100px 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 1s ease-in-out;
+    position: relative;
+  }
+  
+  .view-all-packages-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+  }
+  
+  .main-content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+  }
+  
+  /* Header Section */
+  .header-section {
+    padding: 30px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .page-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Search & Filter */
+  .search-filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .search-box {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    border-radius: 30px;
+    border: 2px solid #4CAF50;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    background: white;
+  }
+  
+  .filter-controls {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .filter-select {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 30px;
+    border: 2px solid #2196F3;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .filter-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+    background: white;
+  }
+  
+  /* Packages Grid */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+  }
+  
+  .package-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .package-card.hovered {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-icon {
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    color: white;
+    padding: 25px 0;
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  .card-body {
+    padding: 25px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .package-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  .detail-item svg {
+    color: #4CAF50;
+  }
+  
+  .discount-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #FF5722;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .card-description {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .action-btn {
+    flex: 1;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .action-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .btn-outline-primary {
+    border-color: #4CAF50;
+    color: #4CAF50;
+  }
+  
+  .btn-outline-primary:hover {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .btn-primary {
+    background: #2196F3;
+    border-color: #2196F3;
+  }
+  
+  .btn-primary:hover {
+    background: #0d8bf2;
+    border-color: #0d8bf2;
+  }
+  
+  .btn-primary.disabled {
+    background: #95a5a6;
+    border-color: #95a5a6;
+    cursor: not-allowed;
+  }
+  
+  .availability-alert,
+  .availability-warning {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+  
+  .availability-alert {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+  }
+  
+  .availability-warning {
+    background: rgba(241, 196, 15, 0.1);
+    color: #f1c40f;
+  }
+  
+  /* Loading Spinner */
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    color: white;
+  }
+  
+  .loading-spinner p {
+    margin-top: 15px;
+    font-size: 1.1rem;
+  }
+  
+  /* No Results */
+  .no-results {
+    text-align: center;
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    color: white;
+  }
+  
+  .no-results h4 {
+    margin: 20px 0 10px;
+    font-size: 1.5rem;
+  }
+  
+  .no-results p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Booking Modal */
+  .booking-modal-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+  }
+  
+  .package-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #4CAF50;
+  }
+  
+  .package-summary h4 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .price-section {
+    margin-bottom: 15px;
+  }
+  
+  .original-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .discount-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-left: 10px;
+  }
+  
+  .package-description {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  
+  .booking-form {
+    padding: 0 10px;
+  }
+  
+  .form-section {
+    margin-bottom: 25px;
+  }
+  
+  .form-section h5 {
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+  
+  .payment-methods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .payment-method {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .payment-method:hover {
+    border-color: #2196F3;
+  }
+  
+  .payment-method.active {
+    border-color: #2196F3;
+    background: rgba(33, 150, 243, 0.1);
+  }
+  
+  .payment-method span {
+    margin-top: 8px;
+    font-size: 0.9rem;
+  }
+  
+  .date-picker {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .payment-summary {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+  }
+  
+  .summary-item:last-child {
+    border-bottom: none;
+  }
+  
+  .summary-item.discount span:last-child {
+    color: #e74c3c;
+  }
+  
+  .summary-item.total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 15px;
+  }
+  
+  .summary-item.total span:last-child {
+    color: #4CAF50;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .booking-modal-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .package-summary {
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .search-filter-section {
+      flex-direction: column;
+    }
+    
+    .search-box,
+    .filter-controls {
+      min-width: 100%;
+    }
+    
+    .filter-controls {
+      flex-direction: column;
+    }
+    
+    .packages-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .header-section {
+      padding: 20px 15px;
+    }
+    
+    .page-title {
+      font-size: 2rem;
+    }
+    
+    .card-actions {
+      flex-direction: column;
+    }
+    
+    .action-btn {
+      width: 100%;
+    }
+  }
+  
+  /* Receipt PDF Styles */
+  .receipt-pdf {
+    width: 300px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .receipt-header {
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+  }
+  
+  .receipt-header h4 {
+    color: #2196F3;
+    margin: 0;
+  }
+  
+  .receipt-header h2 {
+    color: #4CAF50;
+    margin: 5px 0 0;
+  }
+  
+  .receipt-body {
+    margin: 15px 0;
+  }
+  
+  .receipt-body p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .receipt-body p strong {
+    color: #555;
+  }
+  
+  .receipt-footer {
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #4CAF50;
+    color: #777;
+    font-style: italic;
+  }

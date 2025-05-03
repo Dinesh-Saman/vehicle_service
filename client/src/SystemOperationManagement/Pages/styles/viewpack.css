@@ -1,0 +1,47 @@
+/* styles/UpdatePackage.css */
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    margin: auto;
+    max-width: 800px; /* Set a max-width for the card */
+}
+
+.card-header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 15px 15px 0 0; /* Rounded corners on the top */
+}
+
+.custom-input {
+    border-radius: 5px; /* Rounded corners for input fields */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.custom-input:hover {
+    border-color: #007bff; /* Change border color on hover */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Add shadow on hover */
+}
+
+.custom-textarea {
+    border-radius: 5px; /* Rounded corners for textarea */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.custom-textarea:hover {
+    border-color: #007bff; /* Change border color on hover */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Add shadow on hover */
+}
+
+.btn-outline-primary {
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    padding: 10px 20px;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}

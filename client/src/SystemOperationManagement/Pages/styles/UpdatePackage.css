@@ -1,0 +1,53 @@
+/* CSS for modern card and rounded container */
+.modern-card {
+    border-radius: 20px; /* Rounded corners for modern look */
+    overflow: hidden; /* Ensure contents fit within rounded corners */
+    border: 1px solid #dee2e6; /* Light border color */
+}
+
+.card-header {
+    border-bottom: 1px solid #dee2e6; /* Border below header */
+    border-radius: 20px 20px 0 0; /* Rounded top corners */
+}
+
+.card-body {
+    padding: 2rem; /* Add padding for better spacing */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border-color: #007bff; /* Border color to match button */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+    border-color: #004080; /* Darker border color on hover */
+}
+
+.form-label i {
+    color: #007bff; /* Color for icon */
+}
+
+.form-control {
+    border-radius: 10px; /* Rounded corners for input fields */
+}
+
+.title-underline {
+    position: absolute;
+    bottom: -5px; /* Adjust based on your layout */
+    width: 100%;
+    height: 2px;
+    background-color: #007bff; /* Adjust color as needed */
+    border-radius: 2px;
+}
+
+
+.highlight-color {
+    background-color: #ffcc00; /* Bright highlight color */
+    border: none; /* Remove default border */
+}
+
+.highlight-color:hover {
+    background-color: #e6b800; /* Darker shade on hover */
+    color: #fff; /* Change text color on hover */
+}

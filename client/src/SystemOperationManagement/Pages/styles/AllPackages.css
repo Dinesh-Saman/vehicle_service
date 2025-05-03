@@ -1,0 +1,109 @@
+/* Hover effect for action icons */
+.icon-hover {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .icon-hover:hover {
+    transform: scale(1.3);
+    color: #28a745; /* Change icon color on hover */
+  }
+  
+  /* Tooltip styling */
+  .react-tooltip {
+    background-color: #000;
+    color: #fff;
+    font-size: 12px;
+  }
+  
+/* AllPackages.css */
+
+/* Sidebar container */
+.dashboard {
+  width: 250px;
+  padding: 20px;
+  background: #f8f9fa;
+  height: 100%;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #ddd;
+}
+
+/* Sidebar heading */
+.dashboard h4 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* Sidebar styles */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+
+.sidebar-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-item:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+}
+
+.statistics {
+  margin-top: 20px;
+}
+
+.icon-hover {
+  transition: color 0.3s;
+}
+
+.icon-hover:hover {
+  color: #007bff;
+}
+/* In AllPackages.css */
+.modal-content {
+  width: 100%; /* Maximize modal width */
+  max-width: 90vw; /* Limit the max width to 90% of the viewport */
+}
+
+.modal-body {
+  max-height: 60vh; /* Reduce the height of the modal body */
+  overflow-y: auto; /* Enable scrolling if content exceeds the height */
+}
+
+
+.custom-modal .modal-dialog {
+  max-width: 200%; /* Adjust as needed */
+}
+
+.custom-modal .modal-content {
+  height: 80vh; /* Adjust as needed */
+}
+
+
+.custom-button {
+  width: 150px; /* Set a fixed width for both buttons */
+  height: 50px; /* Set a fixed height for both buttons */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  font-weight: bold; /* Optional: Make text bold */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.custom-button:first-of-type {
+  background: linear-gradient(45deg, #ff6f00, #ffcc80); /* Orange gradient */
+}
+
+.custom-button:last-of-type {
+  background: linear-gradient(45deg, #ab47bc, #e1bee7); /* Purple gradient */
+}
+
+/* Optional: Change color on hover */
+.custom-button:hover {
+  opacity: 0.9; /* Slightly transparent on hover */
+}
+
+
