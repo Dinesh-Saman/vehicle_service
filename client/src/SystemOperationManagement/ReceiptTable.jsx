@@ -141,8 +141,8 @@ const ReceiptTable = () => {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100 bg-opacity-75  style={{ minHeight: '100vh', marginTop: '80px' }}">
-            <div className="card shadow-lg p-1" style={{ backgroundColor: '#f0f8ff', borderRadius: '20px', maxWidth: '90%', border: '1px solid #ccc' }}>
+        <div className="d-flex justify-content-center align-items-center vh-100 bg-opacity-75" style={{ minHeight: '100vh' }}>
+            <div className="card shadow-lg p-1" style={{ backgroundColor: '#f0f8ff', borderRadius: '20px', maxWidth: '100%', border: '1px solid #ccc'}}>
                 <h2 className="text-center mb-4" style={{ color: '#333' }}>Booking Table</h2>
 
                 <div className="d-flex justify-content-between mb-3">
@@ -205,7 +205,7 @@ const ReceiptTable = () => {
                         style={{ 
                             backgroundColor: '#FF5733',
                             color: '#fff',
-                            width: '150px',
+                            width: '100%',
                             height: '45px',
                             border: 'none',
                             borderRadius: '5px',
@@ -223,12 +223,13 @@ const ReceiptTable = () => {
                         style={{ 
                             backgroundColor: '#28a745',
                             color: '#fff',
-                            width: '150px',
+                            width: '100%',
                             height: '45px',
                             border: 'none',
                             borderRadius: '5px',
                             boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
                             transition: 'background-color 0.3s',
+                            marginTop:'5px'
                         }}
                         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#218838'}
                         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#28a745'}

@@ -1,8 +1,6 @@
-// src/components/AdminLogin.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
@@ -19,8 +17,10 @@ const AdminLogin = () => {
           icon: 'success',
           title: 'Login Successful',
           text: 'You are now logged in as an admin.',
+          timer: 2000,
+          showConfirmButton: false
         }).then(() => {
-          navigate('/add-package'); // Redirect to add-package page
+          navigate('/add-package');
         });
       } else {
         Swal.fire({
@@ -39,33 +39,55 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{
+        minHeight: '100vh',
+        backgroundImage: 'url("https://img.freepik.com/free-photo/mechanic-hand-checking-fixing-broken-car-car-service-garage_146671-19718.jpg?t=st=1746289441~exp=1746293041~hmac=f7f3fec0be4c3c040de8e4bfe1ad2f6c634e692b82c16671000e26aa147dd8e0&w=996")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        padding: '20px',
+        backdropFilter: 'brightness(0.8)',
+      }}
+    >
+      <div className="card shadow-lg border-0" style={{ width: '100%', maxWidth: '500px', backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
+        <div className="card-body p-4">
+          <h3 className="card-title text-center mb-4 text-primary fw-bold">Admin Login</h3>
+          <form onSubmit={handleLogin}>
+            <div className="form-floating mb-3">
+              <input
+                type="email"
+                className="form-control"
+                id="floatingEmail"
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <label htmlFor="floatingEmail">Email address</label>
+            </div>
+            <div className="form-floating mb-4">
+              <input
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <label htmlFor="floatingPassword">Password</label>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary w-100 py-2 d-flex justify-content-center align-items-center"
+            >
+              Login
+            </button>
+          </form>
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
+      </div>
     </div>
   );
 };

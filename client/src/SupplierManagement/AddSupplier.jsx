@@ -115,7 +115,7 @@ export default function AddSupplier() {
     }
 
     return (
-        <div className="d-flex align-items-center justify-content-center vh-100" style={{ marginTop: '90px' }}>
+        <div className="d-flex align-items-center justify-content-center vh-100" style={{ marginTop: '50px', marginBottom:'50px' }}>
             <div className="row w-100">
                 <div className="col-md-8 col-lg-6 mx-auto">
                     <div className="card border-5 shadow rounded-4 bg-light bg-opacity-75">
@@ -278,7 +278,7 @@ export default function AddSupplier() {
         type="submit" 
         className="btn btn-primary me-3" 
         style={{ 
-            width: "150px", 
+            width: "250px", 
             height: "40px", 
             borderRadius: "8px", 
             boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)" 

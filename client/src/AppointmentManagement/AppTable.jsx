@@ -185,6 +185,7 @@ function AppTable() {
               <button 
                 onClick={generateReport}
                 className="btn btn-secondary"
+                style={{width:'45%'}}
               >
                 <FiDownload className="btn-icon" /> Generate Report
               </button>

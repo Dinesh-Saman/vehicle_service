@@ -38,7 +38,7 @@ const Home = () => {
           <Link
             to="/Createappointment"
             className="btn btn-primary"
-            style={{ width: "max-content" }}
+            style={{ width: "max-content", marginLeft:'auto', marginRight:'auto' }}
           >
             Book Now
           </Link>

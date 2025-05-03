@@ -295,10 +295,10 @@ function CreateService() {
           </div>
           <br />
           <div align="right">
-            <Link to="/serviceRecords" className="btn btn-success mx-1" style={{ borderRadius: '0.3rem', marginLeft: '10px', width: '100px', backgroundColor: '#b3202e', borderColor: '#b3202e' }}>
+            <Link to="/serviceRecords" className="btn btn-success mx-1" style={{ borderRadius: '0.3rem', marginLeft: '10px', width: '100%', backgroundColor: 'blue', borderColor: '#b3202e' }}>
               Services
             </Link>
-            <button type="submit" className="btn btn-success mx-1" style={{ borderRadius: '0.3rem', marginLeft: '10px', width: '100px', backgroundColor: '#b3202e', borderColor: '#b3202e' }}>
+            <button type="submit" className="btn btn-success mx-1" style={{ borderRadius: '0.3rem', marginLeft: '10px', width: '100%', backgroundColor: 'green', borderColor: '#b3202e', marginTop:'10px' }}>
               Submit
             </button>
           </div>

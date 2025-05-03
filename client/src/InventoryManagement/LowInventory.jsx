@@ -87,7 +87,7 @@ export default function LowInventory() {
         <button
           onClick={handleBackToInventory}
           className="btn btn-primary"
-          style={{ display: "block", margin: "0 auto", height: "auto" }} // Center the button
+          style={{ display: "block", margin: "0 auto", height: "auto", marginTop:'10px' }} // Center the button
         >
           Back to Inventory
         </button>{" "}

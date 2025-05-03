@@ -60,11 +60,9 @@ const PackageDashboard = () => {
     <div 
       className="d-flex justify-content-center align-items-center min-vh-100" 
       style={{
-        backgroundImage: `url(${dashImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        padding: '90px 0', // Space between header and footer
       }}
     >
       <div

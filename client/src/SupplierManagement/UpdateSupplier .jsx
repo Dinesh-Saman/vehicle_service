@@ -119,7 +119,7 @@ const UpdateSupplier = () => {
     };
 
     return (
-        <div className="d-flex align-items-center justify-content-center vh-100" style={{ marginTop: '90px' }}>
+        <div className="d-flex align-items-center justify-content-center vh-100" style={{ marginTop: '90px', marginBottom:'40px' }}>
             {loading ? (
                 <div className="spinner-border text-primary" role="status">
                     <span className="sr-only">Loading...</span>
