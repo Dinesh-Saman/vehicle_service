@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiEdit2, FiTrash2, FiUserPlus, FiHome } from "react-icons/fi";
 import { FaSearch } from "react-icons/fa";
+import Swal from 'sweetalert2';
+
 import "./Users.css";
 
 function Users() {
