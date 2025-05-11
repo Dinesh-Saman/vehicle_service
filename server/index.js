@@ -161,9 +161,6 @@ app.put('/updateService/:id', async (req, res) => {
 });
 
 
-
-
-
 app.delete("/deleteService/:id", (req, res) => {
   const id = req.params.id;
   ServiceModel.findByIdAndDelete({ _id: id })
